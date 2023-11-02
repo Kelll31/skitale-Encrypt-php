@@ -25,7 +25,7 @@ if (isset($_GET['coder'])) { //кодируем
         $numrows = 0;
     }
     $coder = $_GET['coder'];
-    $coder = str_replace(' ','&emsp;', $coder);
+    $coder = str_replace(' ', '&emsp;', $coder);
     $length = strlen($coder); //длина строки
     $coder_aray = str_split($coder, $numrows);
     $i = $length / $numrows;
@@ -46,7 +46,7 @@ if (isset($_GET['coder'])) { //кодируем
         $i = 0;
         while ($i != $numrows) { //перебор массива 2d и исправление косяков
             if (empty($sucsess_aray[$key2d][$i])) {
-                $sucsess_aray[$key2d][$i] = '.';
+                $sucsess_aray[$key2d][$i] = '_';
             }
             $i++;
         }
@@ -102,34 +102,11 @@ if (isset($_GET['decoder'])) { //декодируем
 
     for ($j = 0; $j != $superlenght; $j++) {
         for ($i = 0; $i != $key2d + 1; $i++) {
+            
             $summary_decode .= $coder_aray[$i][$j];
         }
     }
     echo '</br>';
-
-
-
-    //echo $decoder . '<br>';
-    // print_r($coder_aray);
-/*
-    for ($j = 0; $j < $count_in; $j++) {
-        $count_in_sucsess_aray = count($coder_aray);
-        for ($i = 0; $i != $count_in_sucsess_aray; $i++) {
-            $split_coder_aray = str_split($coder_aray[$i], 1);
-            if (empty($split_coder_aray[$j])) {
-                $split_coder_aray[$j] = '';
-                // echo $i . "</br>";
-            }
-            $summary_decode .= $split_coder_aray[$j];
-            //  echo '</br>';
-            // print_r($split_coder_aray[95]);
-
-        }
-
-    }
-
-    */
-
 
 
 } else {
@@ -142,7 +119,7 @@ if (isset($_GET['decoder'])) { //декодируем
     The earliest varieties
     <form method="GET">
         <textarea type="text" name="coder" placeholder="Текст для зашифровки" required></textarea>
-        <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="14"required />
         <button>Зашифровать</button>
     </form>
     <?php
@@ -152,8 +129,8 @@ if (isset($_GET['decoder'])) { //декодируем
 
 
     <form method="GET">
-    <textarea type="text" name="decoder" placeholder="Текст для расшифровки" required ></textarea>
-        <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
+        <textarea type="text" name="decoder" placeholder="Текст для расшифровки" required></textarea>
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="14"required />
         <button>Расшифровать</button>
     </form>
     <?php
