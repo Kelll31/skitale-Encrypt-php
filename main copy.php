@@ -102,7 +102,7 @@ if (isset($_GET['decoder'])) { //декодируем
 
     for ($j = 0; $j != $superlenght; $j++) {
         for ($i = 0; $i != $key2d + 1; $i++) {
-            
+
             $summary_decode .= $coder_aray[$i][$j];
         }
     }
@@ -116,10 +116,9 @@ if (isset($_GET['decoder'])) { //декодируем
 ?>
 
 <body>
-    The earliest varieties
     <form method="GET">
         <textarea type="text" name="coder" placeholder="Текст для зашифровки" required></textarea>
-        <input type="number" name="numrows" placeholder="Грани" min="3" max="14"required />
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="14" required />
         <button>Зашифровать</button>
     </form>
     <?php
@@ -130,7 +129,7 @@ if (isset($_GET['decoder'])) { //декодируем
 
     <form method="GET">
         <textarea type="text" name="decoder" placeholder="Текст для расшифровки" required></textarea>
-        <input type="number" name="numrows" placeholder="Грани" min="3" max="14"required />
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="14" required />
         <button>Расшифровать</button>
     </form>
     <?php
