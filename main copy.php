@@ -35,12 +35,12 @@ if (isset($_GET['coder'])) { //кодируем
         $i--;
     }
 
-    //echo 'массив $sucsess_aray </br>';
+    echo 'массив $sucsess_aray </br>';
     foreach ($sucsess_aray as $key2d => $value2d) { //двухмерный массив
         echo 'Строка двухмерного массива  =   ' . $key2d . ' </br>  '; // ключ двухмерного массива $value элемент массива, тоесть массив внутри массива
         foreach ($value2d as $key => $value) { // достаем массив из двухмерного массива
-             echo $key . '   =   ' . $value2d[$key];
-             echo '</br>';
+            echo $key . '   =   ' . $value2d[$key];
+            echo '</br>';
         }
         $i = 0;
         while ($i != $numrows) { //перебор массива 2d и исправление косяков
@@ -53,15 +53,19 @@ if (isset($_GET['coder'])) { //кодируем
     $bob = 0;
 
     if (($length % $numrows) != 0) {
-        $count_in_sucsess_aray = count($sucsess_aray[0]);
-        while ($bob != $count_in_sucsess_aray) {
-            $count_sucsess_aray = count($sucsess_aray) - 1;
-            while ($count_sucsess_aray != -1) {
-                $summary_coder .= $sucsess_aray[$count_sucsess_aray][$bob];
-                $count_sucsess_aray--;
+        $count_sucsess_aray = count($sucsess_aray) - 1;
+        for ($i = 0; $i < $count_sucsess_aray; $i++) {
+            foreach ($sucsess_aray as $key => $value) {
+                //echo $sucsess_aray[$key][$i];
+                if (empty($sucsess_aray[$key][$i])) {
+                    $key++;
+                } else {
+                    $summary_coder .= $sucsess_aray[$key][$i]; //клеим все в одну строку
+                }
             }
-            $bob++;
+
         }
+
     } else {
         $summary_coder = 'Невозможно зашифровать если имеется признак делимости без остатка между символами и гранями. </br> Cимволов :   
         ' . $length . ' Граней : ' . $numrows;
