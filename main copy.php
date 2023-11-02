@@ -25,6 +25,7 @@ if (isset($_GET['coder'])) { //кодируем
         $numrows = 0;
     }
     $coder = $_GET['coder'];
+    $coder = str_replace(' ','&emsp;', $coder);
     $length = strlen($coder); //длина строки
     $coder_aray = str_split($coder, $numrows);
     $i = $length / $numrows;
@@ -86,10 +87,31 @@ if (isset($_GET['decoder'])) { //декодируем
 
     $decoder = $_GET['decoder'];
     $length = strlen($decoder);
-    $coder_aray = str_split($decoder, $numrows);
-    $count_in = count($coder_aray);
+    $superlenght = floor($length / $numrows);
+    echo $superlenght;
+    $coder_aray = str_split($decoder, $superlenght);
+    print_r($coder_aray);
+    echo '</br>';
+    $i = 0;
+    foreach ($coder_aray as $key2d => $value2d) {
+        echo '  ключ  ' . $key2d . ' ячейка ' . $value2d . '<br>';
 
 
+    }
+
+
+    for ($j = 0; $j != $superlenght; $j++) {
+        for ($i = 0; $i != $key2d + 1; $i++) {
+            $summary_decode .= $coder_aray[$i][$j];
+        }
+    }
+    echo '</br>';
+
+
+
+    //echo $decoder . '<br>';
+    // print_r($coder_aray);
+/*
     for ($j = 0; $j < $count_in; $j++) {
         $count_in_sucsess_aray = count($coder_aray);
         for ($i = 0; $i != $count_in_sucsess_aray; $i++) {
@@ -105,9 +127,8 @@ if (isset($_GET['decoder'])) { //декодируем
         }
 
     }
-    echo 'Подбор    ' . $numrows;
-    echo "</br> Расшифрованный текст : </br> " . $summary_decode . " </br></br>";
-    $summary_decode = '';
+
+    */
 
 
 
@@ -118,6 +139,7 @@ if (isset($_GET['decoder'])) { //декодируем
 ?>
 
 <body>
+    The earliest varieties
     <form method="GET">
         <textarea type="text" name="coder" placeholder="Текст для зашифровки" required></textarea>
         <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
@@ -130,7 +152,7 @@ if (isset($_GET['decoder'])) { //декодируем
 
 
     <form method="GET">
-        <input type="text" name="decoder" placeholder="Текст для расшифровки" required />
+    <textarea type="text" name="decoder" placeholder="Текст для расшифровки" required ></textarea>
         <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
         <button>Расшифровать</button>
     </form>
