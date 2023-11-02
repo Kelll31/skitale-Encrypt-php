@@ -11,10 +11,19 @@
 
 
 <?php
-$a = '';
-$a2 = '';
-if (isset($_GET['coder'])) { //кодируем
+$summary_coder = '';
+$summary_decode = '';
+if (isset($_GET['numrows'])) {
     $numrows = $_GET['numrows'];
+} else {
+    $numrows = 0;
+}
+if (isset($_GET['coder'])) { //кодируем
+    if (isset($_GET['numrows'])) {
+        $numrows = $_GET['numrows'];
+    } else {
+        $numrows = 0;
+    }
     $coder = $_GET['coder'];
     $length = strlen($coder); //длина строки
     $coder_aray = str_split($coder, $numrows);
@@ -48,13 +57,13 @@ if (isset($_GET['coder'])) { //кодируем
         while ($bob != $count_in_sucsess_aray) {
             $count_sucsess_aray = count($sucsess_aray) - 1;
             while ($count_sucsess_aray != -1) {
-                $a .= $sucsess_aray[$count_sucsess_aray][$bob];
+                $summary_coder .= $sucsess_aray[$count_sucsess_aray][$bob];
                 $count_sucsess_aray--;
             }
             $bob++;
         }
     } else {
-        $a = 'Невозможно зашифровать если имеется признак делимости без остатка между символами и гранями. </br> Cимволов :   
+        $summary_coder = 'Невозможно зашифровать если имеется признак делимости без остатка между символами и гранями. </br> Cимволов :   
         ' . $length . ' Граней : ' . $numrows;
     }
 
@@ -65,8 +74,12 @@ if (isset($_GET['coder'])) { //кодируем
 
 
 if (isset($_GET['decoder'])) { //декодируем
+    if (isset($_GET['numrows'])) {
+        $numrows = $_GET['numrows'];
+    } else {
+        $numrows = 0;
+    }
     $decoder = $_GET['decoder'];
-    $numrows = $_GET['numrows'];
     $length = strlen($decoder);
     $coder_aray = str_split($decoder, $numrows);
     $count_in = count($coder_aray) - 1;
@@ -77,8 +90,8 @@ if (isset($_GET['decoder'])) { //декодируем
         for ($i = 0; $i != $count_in_sucsess_aray; $i++) {
             $split_coder_aray = str_split($coder_aray[$i], 1);
             //print_r($split_coder_aray[0]);
-            $a2 .= $split_coder_aray[$j];
-          //  echo '</br>';
+            $summary_decode .= $split_coder_aray[$j];
+            //  echo '</br>';
         }
     }
 
@@ -101,23 +114,23 @@ if (isset($_GET['decoder'])) { //декодируем
 <body>
     <form method="GET">
         <textarea type="text" name="coder" placeholder="Текст для зашифровки" required></textarea>
-        <input type="number" name="numrows" placeholder="Грани" min="2" max="25" required />
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
         <button>Зашифровать</button>
     </form>
     <?php
     echo "</br> Изначальный текст (кодировка равна " . $numrows . ")   : </br> " . $coder . "</br>";
-    echo "</br> Зашифрованный текст : </br> " . $a . " </br></br>";
+    echo "</br> Зашифрованный текст : </br> " . $summary_coder . " </br></br>";
     ?>
 
 
     <form method="GET">
         <input type="text" name="decoder" placeholder="Текст для расшифровки" required />
-        <input type="number" name="numrows" placeholder="Грани" min="2" max="25" required />
+        <input type="number" name="numrows" placeholder="Грани" min="3" max="25" required />
         <button>Расшифровать</button>
     </form>
     <?php
-     echo "</br> Изначальный текст (кодировка равна " . $numrows . ")   : </br> " . $decoder . "</br>";
-    echo "</br> Расшифрованный текст : </br> " . $a2 . " </br></br>";
+    echo "</br> Изначальный текст (кодировка равна " . $numrows . ")   : </br> " . $decoder . "</br>";
+    echo "</br> Расшифрованный текст : </br> " . $summary_decode . " </br></br>";
     ?>
 
 </body>
